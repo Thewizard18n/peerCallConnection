@@ -3,7 +3,12 @@
 - Rxjs
 - material Angular
 - ngrx
+- webRTC
+
 # Flux of project
+<div align="center">
+  <img alt="dev.finances" src="./screens.png" width="35%">
+</div>
 
 # Stages for the project
 
