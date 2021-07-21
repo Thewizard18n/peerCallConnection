@@ -1,9 +1,25 @@
 # Tools
-- Angular
+- Angular 12
 - Rxjs
+- material Angular
+- ngrx
+- webRTC
 
-## Development server
+<div align="center">
+  <img alt="dev.finances" src="./RTCPeerConnection.png" width="35%">
+</div>
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+# Stages for the project
+
+- Local media track ✅
+- create offer and preparing the enviroment for request -> comming soon 🚧
+- send request to signaling server -> comming soon 🚧 
+- get response from the signaling server -> coming soon 🚧 
+- ICE candidate sent and add candidate -> coming soon 🚧 
+- testing our application -> coming soon 🚧 
+
+# Development server
+
+- Run `ng serve` for a dev server.
 
 
