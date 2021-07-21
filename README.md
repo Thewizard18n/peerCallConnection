@@ -4,7 +4,7 @@
 - material Angular
 - ngrx
 - webRTC
-- 
+
 <div align="center">
   <img alt="dev.finances" src="./RTCPeerConnection.png" width="35%">
 </div>
