@@ -1,0 +1,64 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+.dataFromUser{
+  background-color: black;
+  width: 400px;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.handleMediaMic {
+  color: white;
+  font-size: 100px;
+  margin-right: 50px;
+}
+.handleMediaVideo {
+  color: white;
+  font-size: 100px;
+}
+.warningField{
+  color: white;
+  font-size: 15px;
+}
+.wrapperWarning {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+}
+.error {
+  width: 45%;
+  margin-bottom: 30px;
+}
+.dd{
+  display: none;
+}
+video {
+  width: 100%;
+}
+.chooseMedia {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 0px;
+}
+.wrapMic {
+  display: flex;
+  align-items: center;
+  margin-right: 30px;
+}
+.wrapVideocam{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.slide {
+  margin-right: 10px;
+}

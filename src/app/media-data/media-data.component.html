@@ -1,0 +1,40 @@
+<section class="container">
+  <div class="dataFromUser">
+    <div class="wrapperWarning" *ngIf="!streamTracked">
+      <div class="error">
+          <mat-icon class="handleMediaMic" >
+            {{waitingConfirmation ? "mic" : "mic_off"}}
+          </mat-icon>
+          <mat-icon class="handleMediaVideo">
+            {{waitingConfirmation ? "videocam" : " videocam_off" }}
+          </mat-icon>
+      </div>
+      <div>
+        <p class="warningField" *ngIf="foundMedia ;else notFound">
+          {{ waitingConfirmation ? "esperando o acesso a camera e video" : "acesso negado aos dispositvos pelo usuario"}}
+        </p>
+        <ng-template #notFound>
+          <p class="warningField">dipositivo de entrada (video) nao encontrado</p>
+        </ng-template>
+      </div>
+    </div>
+    <video #videoOfUser [style.display]="streamTracked ? 'block' : 'none'"></video>
+  </div>
+  <div class="chooseMedia">
+    <div class="wrapMic">
+      <mat-slide-toggle class="slide" [checked]="micInputOn" [disabled]="!micInputOn">
+      </mat-slide-toggle>
+      <mat-icon class= "icon">
+        {{waitingConfirmation ? "mic" : "mic_off"}}
+      </mat-icon>
+    </div>
+    <div class="wrapVideocam">
+      <mat-slide-toggle class="slide" [checked]="videoInputOn" [disabled]="!videoInputOn">
+      </mat-slide-toggle>
+      <mat-icon class= "icon">
+        {{waitingConfirmation ? "videocam" : " videocam_off" }}
+      </mat-icon>
+    </div>
+  </div>
+  <button [disabled]="!invite"  mat-raised-button color="accent">Participar</button>
+</section>
