@@ -7,7 +7,7 @@
 
 # Flux of project
 <div align="center">
-  <img alt="dev.finances" src="./screens.png" width="35%">
+  <img alt="dev.finances" src="./RTCPeerConnection.png" width="35%">
 </div>
 
 # Stages for the project
