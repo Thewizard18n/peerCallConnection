@@ -7,4 +7,4 @@ class Config {
   }
 }
 
-export const config = new Config(true , true)
+export const config = new Config(false , true)

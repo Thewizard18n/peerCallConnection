@@ -7,6 +7,8 @@ import { MaterialModule } from './share/material/material.module';
 
 import { AppComponent } from './app.component';
 import { MediaDataComponent } from './media-data/media-data.component';
+import { StoreModule } from '@ngrx/store';
+import { streamTrack } from './state/reducers/stream-track-reducer';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,8 @@ import { MediaDataComponent } from './media-data/media-data.component';
     BrowserModule,
     AppRoutingModule,
     NoopAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    StoreModule.forRoot({tracked: streamTrack})
   ],
   providers: [],
   bootstrap: [AppComponent]

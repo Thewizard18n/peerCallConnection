@@ -1,6 +1,6 @@
 <section class="container">
   <div class="dataFromUser">
-    <div class="wrapperWarning" *ngIf="!streamTracked">
+    <div class="wrapperWarning" *ngIf="!(streamTracked$ | async)">
       <div class="error">
           <mat-icon class="handleMediaMic" >
             {{waitingConfirmation ? "mic" : "mic_off"}}
@@ -19,23 +19,23 @@
         </ng-template>-->
       </div>
     </div>
-    <video #videoOfUser [style.display]="streamTracked ? 'block' : 'none'"></video>
+    <video #videoOfUser [style.display]="(streamTracked$ | async) ? 'block' : 'none'"></video>
   </div>
   <div class="chooseMedia">
     <div class="wrapMic">
-      <mat-slide-toggle class="slide" [checked]="streamTracked" [disabled]="!streamTracked">
+      <mat-slide-toggle class="slide" [checked]="(streamTracked$ | async)" [disabled]="!(streamTracked$ | async)" >
       </mat-slide-toggle>
       <mat-icon class= "icon">
         {{waitingConfirmation ? "mic" : "mic_off"}}
       </mat-icon>
     </div>
     <div class="wrapVideocam">
-      <mat-slide-toggle class="slide" [checked]="streamTracked" [disabled]="!streamTracked">
+      <mat-slide-toggle class="slide" [checked]="(streamTracked$ | async)" [disabled]="!(streamTracked$ | async)" >
       </mat-slide-toggle>
       <mat-icon class= "icon">
         {{waitingConfirmation ? "videocam" : " videocam_off" }}
       </mat-icon>
     </div>
   </div>
-  <button [disabled]="!streamTracked"  mat-raised-button color="accent">Participar</button>
+  <button [disabled]="!(streamTracked$ | async)"  mat-raised-button color="accent">Participar</button>
 </section>
