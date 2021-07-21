@@ -16,7 +16,7 @@
 - send request to signaling server -> comming soon 🚧 
 - get response from the signaling server -> coming soon 🚧 
 - ICE candidate sent and add candidate -> coming soon 🚧 
-- testing us application -> coming soon 🚧 
+- testing our application -> coming soon 🚧 
 
 # Development server
 
