@@ -43,5 +43,5 @@ export class MediaDataComponent implements OnInit {
       this.streamOpen(this.stream, this.el.nativeElement) 
     })
   }
-    
+
 }
