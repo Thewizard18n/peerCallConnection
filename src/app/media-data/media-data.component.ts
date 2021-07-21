@@ -11,27 +11,27 @@ import { MediaDataService } from './media-data.service';
 export class MediaDataComponent implements OnInit {
   @ViewChild('videoOfUser') el:any = ElementRef
 
+  stream:any
   waitingConfirmation: Boolean = true
   streamTracked = false
-  dd=['video' , 'audio']
-  foundMedia = true
-  micInputOn = false
-  videoInputOn = false
-  invite= false
+
 
   constructor(private mediaService: MediaDataService) {}
 
     streamOpen (stream:any , el:any) {
+      console.log(stream)
       el.srcObject =  stream
       el.onloadedmetadata = function () {
       el.play();
     }
   }
-  
     ngOnInit () {
-    this.mediaService.getMediaDevices().subscribe(async val =>{
-      this.streamOpen(await val , this.el.nativeElement) 
+    this.mediaService.getMediaDevices().subscribe(async deviceConnected =>{
+      this.stream = await deviceConnected
+      this.streamTracked = this.stream.active
+      this.streamOpen(this.stream, this.el.nativeElement) 
     })
   }
+  
      
 }
