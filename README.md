@@ -1,9 +1,19 @@
 # Tools
-- Angular
+- Angular 12
 - Rxjs
+- material Angular
+- ngrx
 
-## Development server
+# Stages for the project
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+- Local media track ✅
+- request to signaling server -> comming soon🚧 
+- response from the signaling server -> coming soon🚧 
+- create room enviroment -> coming soon🚧 
+- display media of user -> coming soon🚧 
+
+# Development server
+
+Run `ng serve` for a dev server.
 
 
