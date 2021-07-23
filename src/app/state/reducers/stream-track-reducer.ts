@@ -1,4 +1,4 @@
-import { createReducer, on } from "@ngrx/store";
+import { createReducer, on } from "@ngrx/store"
 import { isTracked } from "../actions/stream-track"
 
 export const trackStream = false

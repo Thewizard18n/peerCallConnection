@@ -3,15 +3,15 @@
     <div class="wrapperWarning" *ngIf="!(streamTracked$ | async)">
       <div class="error">
           <mat-icon class="handleMediaMic" >
-            {{waitingConfirmation ? "mic" : "mic_off"}}
+            {{ (waitingConfirmation$ | async) ? "mic" : "mic_off"}}
           </mat-icon>
           <mat-icon class="handleMediaVideo">
-            {{waitingConfirmation ? "videocam" : " videocam_off" }}
+            {{ (waitingConfirmation$ | async) ? "videocam" : " videocam_off" }}
           </mat-icon>
       </div>
       <div>
         <p class="warningField">
-          {{ waitingConfirmation ? "esperando o acesso a camera e video" : "acesso negado aos dispositvos pelo usuario"}}
+          {{  (waitingConfirmation$ | async) ? "esperando o acesso a camera e video" : "acesso negado aos dispositvos pelo usuario"}}
         </p>
         <!--<ng-template #notFound>
           *ngIf="foundMedia ;else notFound"
@@ -23,17 +23,17 @@
   </div>
   <div class="chooseMedia">
     <div class="wrapMic">
-      <mat-slide-toggle class="slide" [checked]="(streamTracked$ | async)" [disabled]="!(streamTracked$ | async)" >
+      <mat-slide-toggle class="slide" (ngModelChange)="micChange($event , 'audio')" [(ngModel)]="isCheckedMic" [checked]="(streamTracked$ | async)" [disabled]="!(streamTracked$ | async)" >
       </mat-slide-toggle>
       <mat-icon class= "icon">
-        {{waitingConfirmation ? "mic" : "mic_off"}}
+        {{ (waitingConfirmation$ | async) ? "mic" : "mic_off"}}
       </mat-icon>
     </div>
     <div class="wrapVideocam">
-      <mat-slide-toggle class="slide" [checked]="(streamTracked$ | async)" [disabled]="!(streamTracked$ | async)" >
+      <mat-slide-toggle class="slide" (ngModelChange)="videoChange($event , 'video')" [(ngModel)]="isCheckedVideo"  [checked]="(streamTracked$ | async)" [disabled]="!(streamTracked$ | async)" >
       </mat-slide-toggle>
       <mat-icon class= "icon">
-        {{waitingConfirmation ? "videocam" : " videocam_off" }}
+        {{ (waitingConfirmation$ | async) ? "videocam" : " videocam_off" }}
       </mat-icon>
     </div>
   </div>

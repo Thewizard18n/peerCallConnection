@@ -5,10 +5,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './share/material/material.module';
 
-import { AppComponent } from './app.component';
-import { MediaDataComponent } from './media-data/media-data.component';
 import { StoreModule } from '@ngrx/store';
 import { streamTrack } from './state/reducers/stream-track-reducer';
+import { connection } from './state/reducers/connection-reducer';
+
+import { AppComponent } from './app.component';
+import { MediaDataComponent } from './media-data/media-data.component';
+import { FormsModule } from '@angular/forms';
+
+
+
 
 @NgModule({
   declarations: [
@@ -17,10 +23,14 @@ import { streamTrack } from './state/reducers/stream-track-reducer';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     NoopAnimationsModule,
     MaterialModule,
-    StoreModule.forRoot({tracked: streamTrack})
+    StoreModule.forRoot({
+      tracked: streamTrack,
+      connection:connection,
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
