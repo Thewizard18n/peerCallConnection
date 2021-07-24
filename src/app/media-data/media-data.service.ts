@@ -14,8 +14,7 @@ export class MediaDataService {
     video:true, 
   }
 
-  getMediaDevices (){
-    console.log("passei aqui na funcao mediadevice")
+  getMediaDevices () {
      const media$ =  from(
       navigator.mediaDevices.getUserMedia(this.Config)
      )

@@ -20,8 +20,10 @@ export class MediaDataComponent implements OnInit {
   stream:any
   waitingConfirmation$: Observable<boolean>
   streamTracked$: Observable<boolean>
-  isCheckedMic = true
-  isCheckedVideo = true
+  isCheckedMic = false
+  isCheckedVideo = false
+  videoOff = false
+  dd=['audio' , 'video']
 
 
   constructor(
@@ -33,71 +35,86 @@ export class MediaDataComponent implements OnInit {
       this.streamTracked$ = store.select("tracked")
     }
     
-    
-    micChange(event:any, device:any) {
+    micChange(event:any) {
       if(!event){
-        this.el.nativeElement.srcObject.getTracks().map((onDevice:any) => {
-          if(onDevice.kind == device){
-            onDevice.stop()
-          }
-        })
-      } else {
-        this.mediaService.getMediaDevices().subscribe( media =>{
-          this.stream = media
-          this.store.dispatch(isTracked())
-          this.streamOpen(this.stream, this.el.nativeElement) 
-        },
-        () => {
-          this.store.dispatch(refusedConnection())
-        })
+        const mic = this.el.nativeElement.srcObject.getTracks()[0]
+        mic.enabled =  false
+      }else{
+        const mic = this.el.nativeElement.srcObject.getTracks()[0]
+        mic.enabled =  true
       }
     }
 
-    videoChange(event:any , device:any ) {
+    videoChange(event:any) {
       if(!event){
-       this.el.nativeElement.srcObject.getTracks().map((onDevice:any) => {
-          if(onDevice.kind == device){
-            onDevice.stop()
-          }
-        }) 
+        const cam = this.el.nativeElement.srcObject.getTracks()[1]
+        cam.enabled =  false
       }else {
-        this.mediaService.getMediaDevices().subscribe( media =>{
-          this.stream = media
-          this.store.dispatch(isTracked())
-          this.streamOpen(this.stream, this.el.nativeElement) 
-        },
-        () => {
-          this.store.dispatch(refusedConnection())
-        })
+        const cam = this.el.nativeElement.srcObject.getTracks()[1]
+        cam.enabled =  true
       }
+        this.videoOff = !event
     }
     
-    filterDevicesByType (type:any) {
-      const filter = (devices:any) => devices.kind == type
+    filterDevicesByType ( ) {
+      const filter = (devices:any) => devices.kind == 'audioinput' || devices.kind == 'videoinput'
       return filter
     }
     
-    chooseDevice (type:any) {
+    chooseDevice (callback:any) {
       this.mediaService.getConnectedDevices().subscribe(
-        devices => console.log(devices.filter(this.filterDevicesByType(type)))
-        )
-      }
+        devices => callback(devices.filter(this.filterDevicesByType()))
+      )
+    }
+
+    AvailablesDevices (data:any) {
+
+      const  availableDevices = data.map((devices:any) => {
+        if(devices.kind === "videoinput" || devices.kind === "audioinput"){
+          return devices.kind
+        }
+      })
+
+      if(availableDevices.length == 0 ){}
       
+      else if(availableDevices.includes("videoinput") && availableDevices.includes("audioinput")){
+
+       this.store.dispatch(isTracked())
+       this.isCheckedMic=true
+       this.isCheckedVideo=true
+       this.streamOpen(this.stream , this.el.nativeElement) 
+       
+     }else if(availableDevices.includes("videoinput")){
+
+       this.store.dispatch(isTracked())
+       this.isCheckedVideo = true
+       this.streamOpen(this.stream , this.el.nativeElement) 
+        
+      }else {
+
+       this.isCheckedMic = true
+
+      }
+    }
+
     streamOpen (stream:any , el:any) {
       el.srcObject =  stream
       el.onloadedmetadata = function () {
       el.play();
     }
+   
   } 
 
     ngOnInit () {
       this.mediaService.getMediaDevices().subscribe( media =>{
         this.stream = media
-        this.store.dispatch(isTracked())
-        this.streamOpen(this.stream, this.el.nativeElement) 
+        this.chooseDevice((data:any) => this.AvailablesDevices(data))
+        
       },
-      () => {
-        this.store.dispatch(refusedConnection())
-      })
+      () => this.store.dispatch(refusedConnection()))
     }
   }
+
+
+
+   

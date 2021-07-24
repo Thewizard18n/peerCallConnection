@@ -2,12 +2,12 @@
   <div class="dataFromUser">
     <div class="wrapperWarning" *ngIf="!(streamTracked$ | async)">
       <div class="error">
-          <mat-icon class="handleMediaMic" >
-            {{ (waitingConfirmation$ | async) ? "mic" : "mic_off"}}
-          </mat-icon>
-          <mat-icon class="handleMediaVideo">
-            {{ (waitingConfirmation$ | async) ? "videocam" : " videocam_off" }}
-          </mat-icon>
+        <mat-icon class="handleMediaMic" >
+          {{ (waitingConfirmation$ | async)  ? "mic" : "mic_off"}}
+        </mat-icon>
+        <mat-icon class="handleMediaVideo">
+          {{ (waitingConfirmation$ | async) ? "videocam" : " videocam_off" }}
+        </mat-icon>
       </div>
       <div>
         <p class="warningField">
@@ -19,23 +19,25 @@
         </ng-template>-->
       </div>
     </div>
-    <video #videoOfUser [style.display]="(streamTracked$ | async) ? 'block' : 'none'"></video>
+    <mat-icon class="videoOff" *ngIf="videoOff">videocam_off</mat-icon>
+    <video #videoOfUser [style.display]="(streamTracked$ | async) && isCheckedVideo  ? 'block' : 'none'"></video>
   </div>
   <div class="chooseMedia">
     <div class="wrapMic">
-      <mat-slide-toggle class="slide" (ngModelChange)="micChange($event , 'audio')" [(ngModel)]="isCheckedMic" [checked]="(streamTracked$ | async)" [disabled]="!(streamTracked$ | async)" >
+      <mat-slide-toggle class="slide" (ngModelChange)="micChange($event)" [(ngModel)]="isCheckedMic" [disabled]="!(streamTracked$ | async)" >
       </mat-slide-toggle>
       <mat-icon class= "icon">
-        {{ (waitingConfirmation$ | async) ? "mic" : "mic_off"}}
+        {{ (waitingConfirmation$ | async) && isCheckedMic ? "mic" : "mic_off"}}
       </mat-icon>
     </div>
     <div class="wrapVideocam">
-      <mat-slide-toggle class="slide" (ngModelChange)="videoChange($event , 'video')" [(ngModel)]="isCheckedVideo"  [checked]="(streamTracked$ | async)" [disabled]="!(streamTracked$ | async)" >
+      <mat-slide-toggle class="slide" (ngModelChange)="videoChange($event)" [(ngModel)]="isCheckedVideo"  [disabled]="!(streamTracked$ | async)" >
       </mat-slide-toggle>
       <mat-icon class= "icon">
-        {{ (waitingConfirmation$ | async) ? "videocam" : " videocam_off" }}
+        {{ (waitingConfirmation$ | async) && isCheckedVideo ? "videocam" : " videocam_off" }}
       </mat-icon>
     </div>
   </div>
   <button [disabled]="!(streamTracked$ | async)"  mat-raised-button color="accent">Participar</button>
 </section>
+

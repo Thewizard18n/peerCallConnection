@@ -62,3 +62,10 @@ video {
 .slide {
   margin-right: 10px;
 }
+.videoOff {
+  display: flex ;
+  justify-content: center;
+  align-items: center;
+  color: #ffff;
+  font-size: 100px;
+}
