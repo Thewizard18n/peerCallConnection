@@ -23,7 +23,6 @@ export class MediaDataComponent implements OnInit {
   isCheckedMic = false
   isCheckedVideo = false
   videoOff = false
-  dd=['audio' , 'video']
 
 
   constructor(
@@ -36,55 +35,45 @@ export class MediaDataComponent implements OnInit {
     }
     
     micChange(event:any) {
-      if(!event){
         const mic = this.el.nativeElement.srcObject.getTracks()[0]
-        mic.enabled =  false
-      }else{
-        const mic = this.el.nativeElement.srcObject.getTracks()[0]
-        mic.enabled =  true
-      }
+        mic.enabled =  event
     }
 
     videoChange(event:any) {
-      if(!event){
         const cam = this.el.nativeElement.srcObject.getTracks()[1]
-        cam.enabled =  false
-      }else {
-        const cam = this.el.nativeElement.srcObject.getTracks()[1]
-        cam.enabled =  true
-      }
+        cam.enabled =  event
         this.videoOff = !event
     }
     
-    filterDevicesByType ( ) {
-      const filter = (devices:any) => devices.kind == 'audioinput' || devices.kind == 'videoinput'
-      return filter
+    choosingPriorityDevice (type:any){
+      this.availablesDevices((data:any) => {
+        const availablesDevicesforchoose = data.filter((deviceAvailables:any) => deviceAvailables.kind == type)
+        // here will have payload for array
+      })
     }
     
-    chooseDevice (callback:any) {
+    availablesDevices (callback:any) {
       this.mediaService.getConnectedDevices().subscribe(
-        devices => callback(devices.filter(this.filterDevicesByType()))
+        devices => callback(devices.map((devices:any) => {
+          if( devices.kind == 'audioinput' || devices.kind == 'videoinput'){
+             return devices.kind
+          }
+        }))
       )
     }
 
-    AvailablesDevices (data:any) {
-
-      const  availableDevices = data.map((devices:any) => {
-        if(devices.kind === "videoinput" || devices.kind === "audioinput"){
-          return devices.kind
-        }
-      })
-
-      if(availableDevices.length == 0 ){}
+    modelBehavior (data:any) {
       
-      else if(availableDevices.includes("videoinput") && availableDevices.includes("audioinput")){
+      if(data.length == 0 ){}
+      
+      else if(data.includes("videoinput") && data.includes("audioinput")){
 
        this.store.dispatch(isTracked())
        this.isCheckedMic=true
        this.isCheckedVideo=true
        this.streamOpen(this.stream , this.el.nativeElement) 
        
-     }else if(availableDevices.includes("videoinput")){
+     }else if(data.includes("videoinput")){
 
        this.store.dispatch(isTracked())
        this.isCheckedVideo = true
@@ -108,7 +97,7 @@ export class MediaDataComponent implements OnInit {
     ngOnInit () {
       this.mediaService.getMediaDevices().subscribe( media =>{
         this.stream = media
-        this.chooseDevice((data:any) => this.AvailablesDevices(data))
+        this.availablesDevices((data:any) => this.modelBehavior(data))
         
       },
       () => this.store.dispatch(refusedConnection()))
