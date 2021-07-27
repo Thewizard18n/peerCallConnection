@@ -18,11 +18,15 @@ export class MediaDataComponent implements OnInit {
   @ViewChild('videoOfUser') el:any = ElementRef
 
   stream:any
+
   waitingConfirmation$: Observable<boolean>
   streamTracked$: Observable<boolean>
+ 
+
   isCheckedMic = false
   isCheckedVideo = false
   videoOff = false
+  devicesByType  = []
 
 
   constructor(
@@ -47,8 +51,9 @@ export class MediaDataComponent implements OnInit {
     
     choosingPriorityDevice (type:any){
       this.availablesDevices((data:any) => {
-        const availablesDevicesforchoose = data.filter((deviceAvailables:any) => deviceAvailables.kind == type)
-        // here will have payload for array
+        const availablesDevicesForChoose = data.filter((deviceAvailables:any) => deviceAvailables === type)
+        this.devicesByType = availablesDevicesForChoose
+      
       })
     }
     
@@ -61,7 +66,7 @@ export class MediaDataComponent implements OnInit {
         }))
       )
     }
-
+    
     modelBehavior (data:any) {
       
       if(data.length == 0 ){}

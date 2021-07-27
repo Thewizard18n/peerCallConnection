@@ -5,7 +5,7 @@ export const waitingConfirmation = true
 
 const _connectionReducer = createReducer(
   waitingConfirmation,
-  on(refusedConnection, (state) => false)
+  on(refusedConnection, () => false)
 )
 
 export const connection = (state:any , action:any) => {

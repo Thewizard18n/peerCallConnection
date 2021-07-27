@@ -8,9 +8,11 @@ import { Observable , from  } from 'rxjs';
 })
 export class MediaDataService {
 
+  device: string[] = []
+
   constructor() { }
   Config = {
-    audio:true,
+    audio:false,
     video:true, 
   }
 

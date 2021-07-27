@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core'
 import { MatIconModule } from '@angular/material/icon'
 import { MatSlideToggleModule } from '@angular/material/slide-toggle'
 import { MatButtonModule } from '@angular/material/button' 
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 
 @NgModule({
@@ -9,12 +10,14 @@ import { MatButtonModule } from '@angular/material/button'
   imports: [
     MatIconModule,
     MatSlideToggleModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSidenavModule
   ],
   exports: [
     MatIconModule,
     MatSlideToggleModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSidenavModule
   ]
 })
 export class MaterialModule { }

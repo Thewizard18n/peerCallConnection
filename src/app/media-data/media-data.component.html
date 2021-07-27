@@ -1,41 +1,44 @@
 <section class="container">
-  <div class="dataFromUser">
-    <div class="wrapperWarning" *ngIf="!(streamTracked$ | async)">
-      <div class="error">
-        <mat-icon class="handleMediaMic" >
-          {{ (waitingConfirmation$ | async)  ? "mic" : "mic_off"}}
-        </mat-icon>
-        <mat-icon class="handleMediaVideo">
-          {{ (waitingConfirmation$ | async) ? "videocam" : " videocam_off" }}
+  <div>
+    <div class="dataFromUser">
+      <div class="wrapperWarning" *ngIf="!(streamTracked$ | async)">
+        <div class="error">
+          <mat-icon class="handleMediaMic" >
+            {{ (waitingConfirmation$ | async)  ? "mic" : "mic_off"}}
+          </mat-icon>
+          <mat-icon class="handleMediaVideo">
+            {{ (waitingConfirmation$ | async) ? "videocam" : " videocam_off" }}
+          </mat-icon>
+        </div>
+        <div>
+          <p class="warningField">
+            {{  (waitingConfirmation$ | async) ? "esperando o acesso a camera e video" : "acesso negado aos dispositvos pelo usuario"}}
+          </p>
+          <!--<ng-template #notFound>
+            *ngIf="foundMedia ;else notFound"
+            <p class="warningField">dipositivo de entrada (video) nao encontrado</p>
+          </ng-template>-->
+        </div>
+      </div>
+      <mat-icon class="videoOff" *ngIf="videoOff">videocam_off</mat-icon>
+      <video #videoOfUser [style.display]="(streamTracked$ | async) && isCheckedVideo  ? 'block' : 'none'"></video>
+    </div>
+    <div class="chooseMedia">
+      <div class="wrapMic">
+        <mat-slide-toggle class="slide" (ngModelChange)="micChange($event)" [(ngModel)]="isCheckedMic" [disabled]="!(streamTracked$ | async)" >
+        </mat-slide-toggle>
+        <mat-icon class= "icon">
+          {{ (waitingConfirmation$ | async) && isCheckedMic ? "mic" : "mic_off"}}
         </mat-icon>
       </div>
-      <div>
-        <p class="warningField">
-          {{  (waitingConfirmation$ | async) ? "esperando o acesso a camera e video" : "acesso negado aos dispositvos pelo usuario"}}
-        </p>
-        <!--<ng-template #notFound>
-          *ngIf="foundMedia ;else notFound"
-          <p class="warningField">dipositivo de entrada (video) nao encontrado</p>
-        </ng-template>-->
+      <div class="wrapVideocam">
+        <mat-slide-toggle class="slide" (ngModelChange)="videoChange($event)" [(ngModel)]="isCheckedVideo"  [disabled]="!(streamTracked$ | async)" >
+        </mat-slide-toggle>
+        <mat-icon class= "icon">
+          {{ (waitingConfirmation$ | async) && isCheckedVideo ? "videocam" : " videocam_off" }}
+        </mat-icon>
       </div>
-    </div>
-    <mat-icon class="videoOff" *ngIf="videoOff">videocam_off</mat-icon>
-    <video #videoOfUser [style.display]="(streamTracked$ | async) && isCheckedVideo  ? 'block' : 'none'"></video>
-  </div>
-  <div class="chooseMedia">
-    <div class="wrapMic">
-      <mat-slide-toggle class="slide" (ngModelChange)="micChange($event)" [(ngModel)]="isCheckedMic" [disabled]="!(streamTracked$ | async)" >
-      </mat-slide-toggle>
-      <mat-icon class= "icon">
-        {{ (waitingConfirmation$ | async) && isCheckedMic ? "mic" : "mic_off"}}
-      </mat-icon>
-    </div>
-    <div class="wrapVideocam">
-      <mat-slide-toggle class="slide" (ngModelChange)="videoChange($event)" [(ngModel)]="isCheckedVideo"  [disabled]="!(streamTracked$ | async)" >
-      </mat-slide-toggle>
-      <mat-icon class= "icon">
-        {{ (waitingConfirmation$ | async) && isCheckedVideo ? "videocam" : " videocam_off" }}
-      </mat-icon>
+      <mat-icon class="icon">settings</mat-icon>
     </div>
   </div>
   <button [disabled]="!(streamTracked$ | async)"  mat-raised-button color="accent">Participar</button>

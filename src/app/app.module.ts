@@ -29,7 +29,7 @@ import { FormsModule } from '@angular/forms';
     MaterialModule,
     StoreModule.forRoot({
       tracked: streamTrack,
-      connection:connection,
+      connection: connection,
     })
   ],
   providers: [],
