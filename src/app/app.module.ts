@@ -12,6 +12,8 @@ import { connection } from './state/reducers/connection-reducer';
 import { AppComponent } from './app.component';
 import { MediaDataComponent } from './media-data/media-data.component';
 import { FormsModule } from '@angular/forms';
+import { SettingsMenuComponent } from './settings-menu/settings-menu.component';
+import { SettingsMenuSheetComponent } from './settings-menu/settings-menu-sheet/settings-menu-sheet.component';
 
 
 
@@ -20,6 +22,8 @@ import { FormsModule } from '@angular/forms';
   declarations: [
     AppComponent,
     MediaDataComponent,
+    SettingsMenuComponent,
+    SettingsMenuSheetComponent,
   ],
   imports: [
     BrowserModule,

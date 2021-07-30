@@ -8,13 +8,13 @@ import { Observable , from  } from 'rxjs';
 })
 export class MediaDataService {
 
-  device: string[] = []
+  Config = {
+   audio:true,
+   video:true
+  }
 
   constructor() { }
-  Config = {
-    audio:false,
-    video:true, 
-  }
+
 
   getMediaDevices () {
      const media$ =  from(
@@ -25,8 +25,12 @@ export class MediaDataService {
 
   getConnectedDevices () {
     const devices$ = from(
+
       navigator.mediaDevices.enumerateDevices()
     )
-    return devices$
+
+      navigator.mediaDevices.addEventListener('devicechange' , () => {})
+	  return devices$
   }
+
 }

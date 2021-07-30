@@ -26,7 +26,7 @@ export class MediaDataComponent implements OnInit {
   isCheckedMic = false
   isCheckedVideo = false
   videoOff = false
-  devicesByType  = []
+
 
 
   constructor(
@@ -49,14 +49,7 @@ export class MediaDataComponent implements OnInit {
         this.videoOff = !event
     }
     
-    choosingPriorityDevice (type:any){
-      this.availablesDevices((data:any) => {
-        const availablesDevicesForChoose = data.filter((deviceAvailables:any) => deviceAvailables === type)
-        this.devicesByType = availablesDevicesForChoose
       
-      })
-    }
-    
     availablesDevices (callback:any) {
       this.mediaService.getConnectedDevices().subscribe(
         devices => callback(devices.map((devices:any) => {
@@ -65,7 +58,9 @@ export class MediaDataComponent implements OnInit {
           }
         }))
       )
-    }
+ }
+	
+   
     
     modelBehavior (data:any) {
       

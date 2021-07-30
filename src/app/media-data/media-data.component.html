@@ -38,8 +38,8 @@
           {{ (waitingConfirmation$ | async) && isCheckedVideo ? "videocam" : " videocam_off" }}
         </mat-icon>
       </div>
-      <mat-icon class="icon">settings</mat-icon>
-    </div>
+       <app-settings-menu></app-settings-menu>
+      </div>
   </div>
   <button [disabled]="!(streamTracked$ | async)"  mat-raised-button color="accent">Participar</button>
 </section>
